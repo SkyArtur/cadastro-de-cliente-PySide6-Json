@@ -1,0 +1,2 @@
+class ManagerOperations:
+    pass
