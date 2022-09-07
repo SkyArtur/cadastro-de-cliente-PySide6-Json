@@ -1,10 +1,10 @@
-from PySide6.QtWidgets import QApplication
-from sys import exit, argv
+from sys import exit
 from .gui_login import GUILogin
+from .gui_operations_main import GUIOperationsMain
+from .objects import app
 
 
 def execute_app():
-    app = QApplication(argv)
     win = GUILogin()
     win.show()
     exit(app.exec())
