@@ -44,8 +44,8 @@ class GUILogin(MyWidgetStandard):
         self.button_register.clicked(self.command_register)
 
     def command_login(self):
-        manager = ManagerLogin()
-        if manager.valid_password(self.__username.text(), self.__password.hash()):
+        manager = ManagerLogin(self.__username.text(), self.__password.hash())
+        if manager.valid_password():
             if self.main_operations is None:
                 self.main_operations = GUIOperationsMain()
                 self.main_operations.show()

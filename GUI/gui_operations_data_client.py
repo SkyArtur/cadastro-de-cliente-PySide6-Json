@@ -7,7 +7,7 @@ class GUIOperationsDataClient(MyWidgetStandard):
         super().__init__()
         self.setFixedWidth(540)
         self.setFixedHeight(180)
-        self.setFont(self.font2)
+        self.setFont(self.font3)
         self.setWindowTitle('Atualizar dados do Cliente')
         self.Table_Changes = QTabWidget(self)
         self.tab_change_address = QWidget()

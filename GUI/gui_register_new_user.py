@@ -14,7 +14,6 @@ class GUIRegisterNewUser(MyWidgetStandard):
         self.label_username = MyLabelStandard(self, 'Username')
         self.label_password = MyLabelStandard(self, 'Password')
         self.label_confirm_password = MyLabelStandard(self, 'Confirm')
-        self.label_message = MyLabelMessages(self)
         self.label_bottom = MyLabelBottom(self, '\u00a9SkyArtur - 2022')
         self.__name = MyInputStandard(self)
         self.__username = MyInputStandard(self)
@@ -46,15 +45,14 @@ class GUIRegisterNewUser(MyWidgetStandard):
         self.label_username.setGeometry(QRect(20, 110, 61, 31))
         self.label_password.setGeometry(QRect(20, 150, 61, 31))
         self.label_confirm_password.setGeometry(QRect(20, 190, 61, 31))
-        self.label_message.setGeometry(QRect(210, 150, 81, 71))
         self.label_top.setGeometry(QRect(20, 10, 261, 41))
         self.label_bottom.setGeometry(QRect(10, 290, 281, 20))
 
     def setup_inputs(self):
         self.__name.setGeometry(QRect(62, 70, 221, 31))
         self.__username.setGeometry(QRect(82, 110, 201, 31))
-        self.__password.setGeometry(QRect(82, 150, 121, 31))
-        self.__confirm.setGeometry(QRect(82, 190, 121, 31))
+        self.__password.setGeometry(QRect(82, 150, 201, 31))
+        self.__confirm.setGeometry(QRect(82, 190, 201, 31))
 
     def setup_buttons(self):
         self.button_save_user.setGeometry(QRect(90, 230, 91, 31))
@@ -64,12 +62,14 @@ class GUIRegisterNewUser(MyWidgetStandard):
 
     def command_save(self):
         manager = ManagerNewUser(self.name, self.username, self.password, self.confirm)
-        if not manager.valid_username() or not manager.confirm_password():
-            self.__name.clear()
+        if not manager.valid_username():
             self.__username.clear()
+            self.__username.setPlaceholderText("Nome de usuário inválido!")
+            return
+        elif not manager.confirm_password():
             self.__password.clear()
             self.__confirm.clear()
-            self.__username.setPlaceholderText("Nome de usuário inválido!")
+            self.__password.setPlaceholderText("Senhas não conferem!")
             return
         else:
             manager.save_new_user()

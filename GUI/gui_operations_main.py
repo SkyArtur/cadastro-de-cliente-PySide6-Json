@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from .objects import *
-from .gui_operations_account import GUIOperationsAccount
-from .gui_operations_data_client import GUIOperationsDataClient
-from managers import ManagerNewClient
+from time import strftime, localtime
+from managers import ManagerNewClient, ManagerOperations
 
 
 class GUIOperationsMain(MyWidgetStandard):
@@ -10,6 +9,7 @@ class GUIOperationsMain(MyWidgetStandard):
         super().__init__()
         self.change_data_client = None
         self.operations = None
+        self.__account = None
         self.setFixedWidth(830)
         self.setFixedHeight(490)
         self.setWindowTitle('Sistema de Cadastro de Clientes')
@@ -40,7 +40,7 @@ class GUIOperationsMain(MyWidgetStandard):
         self.__search = MyInputStandard(self.table_operations)
         self.__birthday = QDateEdit(self.table_new_client)
         self.__cpf = MyInputCPF(self.table_new_client)
-        self.__phone = MyInputStandard(self.table_new_client)
+        self.__phone = MyInputPhone(self.table_new_client)
         self.__name = MyInputStandard(self.table_new_client)
         self.__email = MyInputStandard(self.table_new_client)
         self.__cep = MyInputCEP(self.table_new_client)
@@ -51,14 +51,14 @@ class GUIOperationsMain(MyWidgetStandard):
         self.__home_number = MyInputStandard(self.table_new_client)
         self.__balance = MyInputFloat(self.table_new_client)
         self.__credits = MyInputFloat(self.table_new_client)
+        self.__value_operation = MyInputFloat(self.groupbox_main_buttons)
         self.button_deposit = MyButtonStandard(self.groupbox_main_buttons, "Depósito")
         self.button_withdraw = MyButtonStandard(self.groupbox_main_buttons, "Saque")
         self.button_change_credits = MyButtonStandard(self.groupbox_main_buttons, "Alterar Limite")
         self.button_statement = MyButtonStandard(self.groupbox_main_buttons, "Extrato")
-        self.button_change_data_client = MyButtonStandard(self.groupbox_main_buttons, "Alterar Dados Pessoais")
         self.button_search = MyButtonStandard(self.table_operations, "Buscar")
-        self.button_search_CEP = MyButtonSearchCEP(self.table_new_client, self.__cep,
-                                                   self.__street, self.__neighborhood, self.__city, self.__state)
+        self.button_search_CEP = MyButtonSearchCEP(self.table_new_client, self.__cep, self.__street,
+                                                   self.__neighborhood, self.__city, self.__state)
         self.button_save_new_client = MyButtonStandard(self.table_new_client, "Salvar Dados")
         self.button_list_clients = MyButtonStandard(self, "Listar Clientes")
         self.button_show_report = MyButtonStandard(self, "Exibir Relatório")
@@ -72,30 +72,35 @@ class GUIOperationsMain(MyWidgetStandard):
         self.setup_checkboxes(), self.setup_buttons()
 
     @property
-    def all(self):
-        data = {
-            "birthday": self.__birthday.text(),
-            "cpf": self.__cpf,
-            "phone": self.__phone,
-            "name": self.__name,
-            "email": self.__email,
-            "cep": self.__cep,
-            "street": self.__street,
-            "home_number": self.__home_number,
-            "neighborhood": self.__neighborhood,
-            "city": self.__city,
-            "state": self.__state,
-            "balance": self.__balance,
-            "credits": self.__credits
-        }
-        for i in data.values():
-            if i is None or i == '':
+    def return_all_inputs(self):
+        my_inputs, data = [
+            self.__birthday, self.__cpf, self.__name, self.__email, self.__phone,
+            self.__cep, self.__street, self.__home_number, self.__neighborhood,
+            self.__city, self.__state, self.__balance, self.__credits
+        ], []
+        for inputs in my_inputs:
+            if inputs.text() is None or inputs.text() == '':
                 raise ValueError
-        return data
+            else:
+                data.append(inputs.text())
+                inputs.clear()
+        return tuple(data)
+
+    @property
+    def value_operation(self):
+        return self.__value_operation.value_input
+
+    @property
+    def account(self):
+        return self.__account
+
+    @account.setter
+    def account(self, value):
+        self.__account = value
 
     def setup_tables(self):
         self.table_main.setGeometry(QRect(10, 60, 811, 361))
-        self.table_main.setFont(self.font2)
+        self.table_main.setFont(self.font3)
         self.table_main.setFocusPolicy(Qt.TabFocus)
         self.table_main.setTabPosition(QTabWidget.West)
         self.table_main.setTabShape(QTabWidget.Rounded)
@@ -138,7 +143,7 @@ class GUIOperationsMain(MyWidgetStandard):
     def setup_inputs(self):
         self.__search.setGeometry(QRect(90, 20, 341, 31))
         self.__birthday.setGeometry(QRect(140, 20, 101, 31))
-        self.__birthday.setFont(self.font1)
+        self.__birthday.setFont(self.font2)
         self.__birthday.setWrapping(False)
         self.__birthday.setButtonSymbols(QAbstractSpinBox.UpDownArrows)
         self.__birthday.setCalendarPopup(True)
@@ -157,6 +162,8 @@ class GUIOperationsMain(MyWidgetStandard):
         self.__balance.setInputMethodHints(Qt.ImhFormattedNumbersOnly)
         self.__credits.setGeometry(QRect(590, 240, 141, 31))
         self.__credits.setInputMethodHints(Qt.ImhFormattedNumbersOnly)
+        self.__value_operation.setGeometry(QRect(20, 40, 211, 41))
+        self.__value_operation.setPlaceholderText('Digite o Valor da Operação')
 
     def setup_radio_buttons(self):
         self.radio_name_client.setGeometry(QRect(530, 20, 61, 31))
@@ -172,20 +179,21 @@ class GUIOperationsMain(MyWidgetStandard):
         self.data_show_new_client_display.setStyleSheet("border: none; padding: 15px;")
         self.data_show_client_display.setGeometry(QRect(10, 15, 480, 265))
         self.data_show_client_display.setStyleSheet("border: none; padding: 15px;")
+        self.data_show_client_display.setFont(self.font1)
+        self.data_show_client_display.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
     def setup_checkboxes(self):
-        self.checkbox_CPF.setGeometry(QRect(450, 20, 75, 31))
+        self.checkbox_CPF.setGeometry(QRect(450, 20, 95, 31))
         self.checkbox_CPF.setText("Validar?")
+        self.checkbox_CPF.clicked.connect(self.check_valid_cpf)
 
     def setup_buttons(self):
         # ----------------------Button search-----------------------------------
         self.button_search.setGeometry(QRect(660, 20, 111, 31))
+        self.button_search.clicked(self.command_search_client)
         # --------------------Button search CEP---------------------------------
         self.button_search_CEP.setGeometry(QRect(190, 100, 51, 31))
         self.button_search_CEP.clicked()
-        # -----------------Button change data client----------------------------
-        self.button_change_data_client.setGeometry(QRect(20, 40, 211, 41))
-        self.button_change_data_client.clicked(self.command_change_data_client)
         # ----------------------Button deposit----------------------------------
         self.button_deposit.setGeometry(QRect(20, 90, 211, 41))
         self.button_deposit.clicked(self.command_deposit)
@@ -197,6 +205,7 @@ class GUIOperationsMain(MyWidgetStandard):
         self.button_change_credits.clicked(self.command_change_credits)
         # --------------------Button statement----------------------------------
         self.button_statement.setGeometry(QRect(20, 240, 211, 41))
+        self.button_statement.clicked(self.command_statement)
         # ------------------Button save new client------------------------------
         self.button_save_new_client.setGeometry(QRect(534, 290, 201, 51))
         self.button_save_new_client.clicked(self.command_save_new_client)
@@ -211,28 +220,132 @@ class GUIOperationsMain(MyWidgetStandard):
     # ------------------------------------------------------------------------------------------------------------------
     #       COMMANDS
     # ------------------------------------------------------------------------------------------------------------------
+    def command_search_client(self):
+        if self.__account is not None:
+            self.__account = None
+        if self.radio_name_client.isChecked():
+            manager = ManagerOperations(name=self.__search.text())
+            self.data_show_client_display.setText(manager.search_client_by_name())
+            self.account = manager.data_client
+        elif self.radio_num_account.isChecked():
+            manager = ManagerOperations(num_account=self.__search.text())
+            self.data_show_client_display.setText(manager.search_client_by_num_account())
+            self.account = manager.data_client
+        elif self.radio_CPF.isChecked():
+            manager = ManagerOperations(cpf=self.__search.text())
+            self.data_show_client_display.setText(manager.search_client_by_cpf())
+            self.account = manager.data_client
+        self.__search.clear()
+
     def command_save_new_client(self):
         try:
-            data = ManagerNewClient(self.all)
-            self.data_show_new_client_display.setText(data.report())
-            self.data_show_new_client_display.setFont(self.font2)
-        except TypeError:
+            manager = ManagerNewClient(self.return_all_inputs)
+            manager.save_new_client()
+            self.data_show_new_client_display.clear()
+            self.data_show_new_client_display.setText(manager.report())
+            self.data_show_new_client_display.setFont(self.font3)
+        except ValueError:
             self.data_show_new_client_display.setText('DADOS INVÁLIDOS!')
             self.data_show_new_client_display.setAlignment(Qt.AlignCenter)
             self.data_show_new_client_display.setFont(self.font)
 
-    def command_change_data_client(self):
-        self.change_data_client = GUIOperationsDataClient()
-        self.change_data_client.show()
-
     def command_deposit(self):
-        self.operations = GUIOperationsAccount("Depósito")
-        self.operations.show()
+        try:
+            self.account['balance'] = self.value_operation + self.account['balance']
+            self.account['available'] = self.account['balance'] + self.account['credits']
+            manager = ManagerOperations()
+            manager.data_client = self.account
+            manager.data_statement = {
+                'id': self.account['id'],
+                'date': strftime("%d/%m/%Y", localtime()),
+                'op': "depósito",
+                "value": f"{self.value_operation:.2f} +"
+            }
+            manager.refresh_account()
+            self.data_show_client_display.setText(manager.print_data_client())
+            manager.data_client = None
+            manager.data_statement = None
+        except ValueError:
+            pass
+        except TypeError:
+            pass
+        finally:
+            self.__value_operation.clear()
+            self.__value_operation.setPlaceholderText('Digite o Valor da Operação')
 
     def command_withdraw(self):
-        self.operations = GUIOperationsAccount("Saque")
-        self.operations.show()
+        try:
+            if self.account['available'] < self.value_operation:
+                self.__value_operation.setPlaceholderText("Valor indisponível")
+                raise ValueError
+            self.account['balance'] = self.account['balance'] - self.value_operation
+            self.account['available'] = self.account['balance'] + self.account['credits']
+            manager = ManagerOperations()
+            manager.data_client = self.account
+            manager.data_statement = {
+                'id': self.account['id'],
+                'date': strftime("%d/%m/%Y", localtime()),
+                'op': "saque",
+                "value": f"{self.value_operation:.2f} -"
+            }
+            manager.refresh_account()
+            self.data_show_client_display.setText(manager.print_data_client())
+            manager.data_client = None
+            manager.data_statement = None
+        except ValueError:
+            pass
+        except TypeError:
+            pass
+        finally:
+            self.__value_operation.clear()
+            self.__value_operation.setPlaceholderText('Digite o Valor da Operação')
 
     def command_change_credits(self):
-        self.operations = GUIOperationsAccount("Alterar Limite")
-        self.operations.show()
+        try:
+            self.account['credits'] = self.value_operation
+            self.account['available'] = self.account['balance'] + self.account['credits']
+            manager = ManagerOperations()
+            manager.data_client = self.account
+            manager.data_statement = {
+                'id': self.account['id'],
+                'date': strftime("%d/%m/%Y", localtime()),
+                'op': "novo limite",
+                "value": f"{self.value_operation:.2f}"
+            }
+            manager.refresh_account()
+            self.data_show_client_display.setText(manager.print_data_client())
+            manager.data_client = None
+            manager.data_statement = None
+        except ValueError:
+            pass
+        except TypeError:
+            pass
+        finally:
+            self.__value_operation.clear()
+            self.__value_operation.setPlaceholderText('Digite o Valor da Operação')
+
+    def command_statement(self):
+        try:
+            manager = ManagerOperations()
+            manager.data_client = self.account
+            self.data_show_client_display.setText(f"{manager.print_data_client()}<br>{manager.get_statement()}")
+            manager.data_client = None
+            manager.data_statement = None
+        except ValueError:
+            pass
+        except TypeError:
+            pass
+
+    def check_valid_cpf(self):
+        if self.checkbox_CPF.isChecked():
+            if ManagerNewClient.validatorNumberCPF(self.__cpf.text()):
+                self.checkbox_CPF.setStyleSheet("""color: #228B22;""")
+                self.checkbox_CPF.setText("CPF válido")
+            else:
+                self.checkbox_CPF.setStyleSheet("""color: red;""")
+                self.checkbox_CPF.setText("CPF inválido")
+        else:
+            self.checkbox_CPF.setStyleSheet("""color: black;""")
+            self.checkbox_CPF.setText("Validar?")
+
+
