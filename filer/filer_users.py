@@ -6,13 +6,13 @@ class FilerUser(Filer):
         super().__init__()
 
     def generator_id_users(self):
-        return self.generator_ids('users')
+        return self.generator_ids("users")
 
     def save_in_users(self, data):
         self.save_in("users", data)
 
     def fetch_all_users(self):
-        users = self.fetch_all('users')
+        users = self.fetch_all("users")
         return users
 
     def fetch_all_names(self):
