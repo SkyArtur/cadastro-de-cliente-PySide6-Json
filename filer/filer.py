@@ -10,7 +10,7 @@ class Filer:
         "./storage/accounts.json",
         "./storage/statement.json"
     ]
-    patterns = [users, clients, account, statement]
+    models = [users, clients, account, statement]
 
     def __init__(self):
         self.__setup_files()
@@ -21,7 +21,7 @@ class Filer:
         for i in range(4):
             if not path.exists(self.file[i]):
                 with open(self.file[i], 'w') as file:
-                    json.dump(self.patterns[i], file, indent=4, ensure_ascii=False)
+                    json.dump(self.models[i], file, indent=4, ensure_ascii=False)
         return
 
     def __select_table(self, table: str):
@@ -36,6 +36,10 @@ class Filer:
         with open(self.__select_table(table)) as file:
             data = json.load(file)
         return data
+
+    def save(self, table: str, data):
+        with open(self.__select_table(table), 'w') as file:
+            json.dump(data, file, indent=4, ensure_ascii=False)
 
     def save_in(self, table: str, data: dict):
         __data = self.fetch_all(table)
