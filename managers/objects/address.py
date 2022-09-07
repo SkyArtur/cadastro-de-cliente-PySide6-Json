@@ -2,7 +2,7 @@ class Address:
     def __init__(self):
         self.__cep = None
         self.__street = None
-        self.__number = None
+        self.__home_number = None
         self.__neighborhood = None
         self.__city = None
         self.__state = None
@@ -24,12 +24,12 @@ class Address:
         self.__street = value.lower()
 
     @property
-    def number(self):
-        return self.__number
+    def home_number(self):
+        return self.__home_number
 
-    @number.setter
-    def number(self, value):
-        self.__number = value
+    @home_number.setter
+    def home_number(self, value):
+        self.__home_number = value
 
     @property
     def neighborhood(self):
