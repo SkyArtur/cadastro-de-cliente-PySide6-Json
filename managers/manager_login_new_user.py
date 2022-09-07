@@ -1,32 +1,34 @@
 from filer import FilerUser
-from .objects import User
+from .objects import User, Patterns
 
 
 class ManagerLogin(User, FilerUser):
-    def __init__(self):
+    def __init__(self, username, password):
         super().__init__()
+        self.username = username
+        self.password = password
 
-    def valid_password(self, name, password):
-        for i in self.fetch_all_users():
-            if name == i['username'] and password == i['password']:
+    def valid_password(self):
+        for dicts in self.fetch_all_users():
+            if self.username == dicts['username'] and self.password == dicts['password']:
                 return True
         return False
 
 
-class ManagerNewUser(ManagerLogin):
-    def __init__(self, *args):
+class ManagerNewUser(User, FilerUser):
+    def __init__(self, name, username, password, confirm):
         super().__init__()
         self.id_user = self.generator_id_users()
-        self.name = args[0]
-        self.username = args[1]
-        self.password = args[2]
-        self.password_confirm = args[3]
+        self.name = name
+        self.username = username
+        self.password = password
+        self.password_confirm = confirm
 
     def valid_username(self):
         if self.username == "" or self.username is None:
             return False
-        for i in self.fetch_all_usernames():
-            if self.username == i:
+        for names in self.fetch_all_usernames():
+            if self.username == names:
                 return False
         return True
 
@@ -36,10 +38,11 @@ class ManagerNewUser(ManagerLogin):
         return self.password == self.password_confirm
 
     def save_new_user(self):
-        user = {
-            "id": self.id_user,
-            "name": self.name,
-            "username": self.username,
-            "password": self.password
-        }
-        self.save_in_users(user)
+        self.save_in_users(
+            Patterns.user(
+                self.id_user,
+                self.name,
+                self.username,
+                self.password
+            )
+        )
