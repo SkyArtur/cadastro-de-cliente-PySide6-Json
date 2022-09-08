@@ -17,10 +17,10 @@ Devido a seu fim didático, para este projeto foi priorizado nomes de variáveis
 
 ### Telas Iniciais
 
-<a align="center"><img width="60%" heigth="100" src="https://user-images.githubusercontent.com/93395366/188978510-8332d356-c79d-40a5-a19e-c31f44a5d51c.png"></a>
+<div align="center"><img width="60%" heigth="100" src="https://user-images.githubusercontent.com/93395366/188978510-8332d356-c79d-40a5-a19e-c31f44a5d51c.png"></div>
 
 
 ### Telas Para Operações em Conta!
 
-<a align="center"><img width="60%" heigth="100" src="https://user-images.githubusercontent.com/93395366/188979959-89477504-9702-4566-8885-5edb493e0511.png"></a>
+<div align="center"><img width="60%" heigth="100" src="https://user-images.githubusercontent.com/93395366/188979959-89477504-9702-4566-8885-5edb493e0511.png"></div>
 
