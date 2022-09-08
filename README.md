@@ -24,3 +24,8 @@ Devido a seu fim didático, para este projeto foi priorizado nomes de variáveis
 
 <div align="center"><img width="60%" heigth="100" src="https://user-images.githubusercontent.com/93395366/188979959-89477504-9702-4566-8885-5edb493e0511.png"></div>
 
+## Autor
+
+| [<img src="https://avatars.githubusercontent.com/u/93395366?v=4" width=115><br><sub>Artur dos Santos Shon</sub>](https://github.com/SkyArtur) 
+| :---: |
+
