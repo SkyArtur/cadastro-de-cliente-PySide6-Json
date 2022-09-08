@@ -1,6 +1,5 @@
 from sys import exit
 from .gui_login import GUILogin
-from .gui_operations_main import GUIOperationsMain
 from .objects import app
 
 
