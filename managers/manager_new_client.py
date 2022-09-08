@@ -1,10 +1,10 @@
 from .objects import Client, Patterns
-from filer import FilerClients
+from filer import FilerCustomers
 from time import strftime, localtime
 import re
 
 
-class ManagerNewClient(Client, FilerClients):
+class ManagerNewClient(Client, FilerCustomers):
     def __init__(self, data: tuple):
         super().__init__()
         if len(data) != 13:
@@ -12,7 +12,7 @@ class ManagerNewClient(Client, FilerClients):
         for cpf in data:
             if cpf == '' or cpf is None:
                 raise ValueError
-        self.id_client = self.define_id_client()
+        self.id_client = self.define_id_customer()
         self.birthday = data[0]
         self.cpf = data[1]
         self.name = data[2]
@@ -37,7 +37,7 @@ class ManagerNewClient(Client, FilerClients):
                 raise ValueError
 
     def save_new_client(self):
-        self.save_in_clients(
+        self.save_in_customers(
             Patterns.client(
                 self.id_client, self.birthday, self.cpf, self.name, self.email, self.phone, self.cep,
                 self.street, self.home_number, self.neighborhood, self.city, self.state
@@ -51,18 +51,20 @@ class ManagerNewClient(Client, FilerClients):
         )
         self.save_in_statement(
             Patterns.statement(
-                self.id_client, self.opening, "Abertura", self.balance
+                self.id_client, self.opening, "abertura", self.balance
             )
         )
 
     def report(self):
-        text = f"Data de Nascimento: {self.birthday}\n" \
-               f"Nome: {self.name}      CPF: {self.cpf}\n" \
-               f"Telefone: {self.phone}      Email: {self.email}\n" \
-               f"Logradouro: {self.street}  Nº{self.home_number}      CEP: {self.cep}\n" \
-               f"Bairro: {self.neighborhood}      Cidade: {self.city}      UF: {self.state}\n" \
-               f"Limite Inicial: R${self.credits:.2f}      Saldo Inicial: R${self.balance:.2f}\n" \
-               f"Disponível: R${self.available}"
+        text = f"""<p><b>Novo Cliente Cadastrado com Sucesso</b></p>
+        <p><b>Data de Nascimento:</b> {self.birthday}</p>
+        <p><b>Nome:</b> {self.name.title()} <b>CPF:</b> {self.cpf}</p>
+        <p><b>Telefone:</b> {self.phone} <b>Email:</b> {self.email}</p>
+        <p><b>Logradouro:</b> {self.street.title()} <b>Nº</b> {self.home_number}</p>      
+        <p><b>CEP:</b> {self.cep}</p>
+        <p><b>Bairro:</b> {self.neighborhood.title()} <b>Cidade:</b> {self.city.title()} <b>UF:</b> {self.state}</p>
+        <p><b>Limite Inicial:</b> R${self.credits:.2f} <b>Saldo Inicial:</b> R${self.balance:.2f}</p>
+        <p><b>Disponível:</b> R${self.available:.2f}</p>"""
         return text
 
     @staticmethod
