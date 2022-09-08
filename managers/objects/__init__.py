@@ -1,3 +1,3 @@
-from .user import User
-from .client import Client
-from .patterns import Patterns
+from managers.objects.user import User
+from managers.objects.client import Client
+from managers.objects.patterns import Patterns

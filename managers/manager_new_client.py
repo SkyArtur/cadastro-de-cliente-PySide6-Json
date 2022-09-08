@@ -1,4 +1,4 @@
-from .objects import Client, Patterns
+from managers.objects import Client, Patterns
 from filer import FilerCustomers
 from time import strftime, localtime
 import re

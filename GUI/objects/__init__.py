@@ -6,10 +6,10 @@ from PySide6.QtWidgets import (
     QApplication
 )
 from PySide6.QtCore import QRect, QSize
-from .objects_push_buttons import *
-from .objects_line_edits import *
-from .objects_widgets import *
-from .objects_labels import *
+from GUI.objects.objects_push_buttons import *
+from GUI.objects.objects_line_edits import *
+from GUI.objects.objects_widgets import *
+from GUI.objects.objects_labels import *
 
 
 

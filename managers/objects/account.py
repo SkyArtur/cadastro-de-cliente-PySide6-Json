@@ -1,4 +1,4 @@
-from .statement import Statement
+from managers.objects.statement import Statement
 
 
 class Account(Statement):

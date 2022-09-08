@@ -1,6 +1,6 @@
 from sys import exit
-from .gui_login import GUILogin
-from .objects import app
+from GUI.gui_login import GUILogin
+from GUI.objects import app
 
 
 def execute_app():

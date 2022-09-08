@@ -1,5 +1,5 @@
-from .address import Address
-from .account import Account
+from managers.objects.address import Address
+from managers.objects.account import Account
 
 
 class Client(Account, Address):

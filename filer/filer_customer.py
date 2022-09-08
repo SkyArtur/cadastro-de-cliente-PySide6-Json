@@ -1,4 +1,4 @@
-from .filer_account import FilerAccount
+from filer.filer_account import FilerAccount
 
 
 class FilerCustomers(FilerAccount):

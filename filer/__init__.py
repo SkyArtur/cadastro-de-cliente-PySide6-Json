@@ -1,4 +1,4 @@
-from .filer_users import FilerUser, Filer
-from .filer_customer import FilerCustomers
-from .filer_account import FilerAccount
+from filer.filer_users import FilerUser, Filer
+from filer.filer_customer import FilerCustomers
+from filer.filer_account import FilerAccount
 

@@ -1,5 +1,5 @@
 from filer import FilerUser
-from .objects import User, Patterns
+from managers.objects import User, Patterns
 
 
 class ManagerLogin(User, FilerUser):

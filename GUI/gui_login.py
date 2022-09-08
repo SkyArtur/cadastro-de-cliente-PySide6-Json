@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from .gui_register_new_user import GUIRegisterNewUser
-from .gui_operations_main import GUIOperationsMain
-from .objects import *
+from GUI.gui_register_new_user import GUIRegisterNewUser
+from GUI.gui_operations_main import GUIOperationsMain
+from GUI.objects import *
 from managers import ManagerLogin
 
 

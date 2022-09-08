@@ -1,5 +1,5 @@
 from os import path, mkdir
-from .models import *
+from filer.models import *
 import json
 
 

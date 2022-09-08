@@ -1,4 +1,4 @@
-from .filer import Filer
+from filer.filer import Filer
 
 
 class FilerUser(Filer):

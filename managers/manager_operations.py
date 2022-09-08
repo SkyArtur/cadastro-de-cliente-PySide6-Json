@@ -1,4 +1,4 @@
-from .objects import Client
+from managers.objects import Client
 from filer import FilerCustomers
 from time import strftime, localtime
 

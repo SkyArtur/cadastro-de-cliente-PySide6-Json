@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .objects import *
+from GUI.objects import *
 from time import strftime, localtime
 from managers import ManagerNewClient, ManagerOperations
 
