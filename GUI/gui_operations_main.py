@@ -74,10 +74,10 @@ class GUIOperationsMain(MyWidgetStandard):
     @property
     def return_all_inputs(self):
         my_inputs, data = [
-                              self.__birthday, self.__cpf, self.__name, self.__email, self.__phone,
-                              self.__cep, self.__street, self.__home_number, self.__neighborhood,
-                              self.__city, self.__state, self.__balance, self.__credits
-                          ], []
+            self.__birthday, self.__cpf, self.__name, self.__email, self.__phone,
+            self.__cep, self.__street, self.__home_number, self.__neighborhood,
+            self.__city, self.__state, self.__balance, self.__credits
+        ], []
         for inputs in my_inputs:
             if inputs.text() is None or inputs.text() == '':
                 raise ValueError
