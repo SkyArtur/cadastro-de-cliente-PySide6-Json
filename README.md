@@ -2,7 +2,7 @@
 <a align="center"><img width="100%" heigth="100" alt="Imagem do funcionamento do programa em uma janela com o código ao fundo." src="https://user-images.githubusercontent.com/93395366/188969231-6137fec8-078a-4871-9879-267651a85fbf.png"></a>
 
 
-# cadastro-de-cliente-PyQtSide6-Json
+# cadastro-de-cliente-PySide6-Json
 
 > status: finalizado
 
