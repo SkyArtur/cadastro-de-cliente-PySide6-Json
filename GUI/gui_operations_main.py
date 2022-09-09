@@ -105,7 +105,6 @@ class GUIOperationsMain(MyWidgetStandard):
         self.table_main.setTabPosition(QTabWidget.West)
         self.table_main.setTabShape(QTabWidget.Rounded)
         self.table_main.setElideMode(Qt.ElideNone)
-        self.table_operations.setObjectName(u"table_operations")
         self.table_operations.setMouseTracking(True)
         self.table_operations.setFocusPolicy(Qt.TabFocus)
         self.table_main.addTab(self.table_operations, "")
