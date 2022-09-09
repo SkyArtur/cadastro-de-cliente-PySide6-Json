@@ -8,10 +8,10 @@
 
 
 Este é a versão com interface gráfica do execício anterior, em que desenvolvi um sistema simples para cadastramento e gerenciamento de contas. A interface gráfica foi
-contruída em PyQt, e para armazenamento persistente de dados, foi escolhido o formato JSON. O software se baseia em três telas, Login, cadastro de usuários, e operações 
-em conta. Além da blbioteca PyQt6, também foi atribuído ao projeto, a API pycep_correios, para pesquisa de endereços via cep. As validações simples, como entradas de 
-números de cpf, e telefone, são realizadas utilizando o REGEX. 
-Buscando entender melhor orientação a objetos, tentei aplicar polimorfismo e herança para construir meus objetos em tela, de forma personalizada. 
+contruída em PySide6(PyQt), e para presistência de dados, foi escolhido o formato JSON. O software se baseia em três telas, Login, cadastro de usuários, e operações 
+em conta. Além da biblioteca PySide6, também foi atribuído ao projeto, a API pycep_correios, para pesquisa de endereços via cep. As validações simples, como entradas de 
+números de cpf, e telefone, são realizadas utilizando o expressões regulares. 
+Buscando entender melhor orientação a objetos, tentei aplicar polimorfismo e herança para construir meus prórpios objetos de tela. Confesso um abuso no uso de list comprehensions, mas é só porque acho uma forma muito prática de iteração e a flexibilidade de uso, pelo menos a meus olhos de iniciante, é fascinante.
 Devido a seu fim didático, para este projeto foi priorizado nomes de variáveis e classes, que apesar de extensos, buscam informar sua função.
 <hr>
 
@@ -24,8 +24,15 @@ Devido a seu fim didático, para este projeto foi priorizado nomes de variáveis
 
 <div align="center"><img width="60%" heigth="100" src="https://user-images.githubusercontent.com/93395366/188979959-89477504-9702-4566-8885-5edb493e0511.png"></div>
 
+## Agradecimento a Michell Stuttgart pela API pycep_correios
+
+| [<img src="https://avatars.githubusercontent.com/u/8174740?v=4" width=115><br><sub>Michell Stuttgart</sub>](https://github.com/mstuttgart) 
+| :---: |
+
+
 ## Autor
 
 | [<img src="https://avatars.githubusercontent.com/u/93395366?v=4" width=115><br><sub>Artur dos Santos Shon</sub>](https://github.com/SkyArtur) 
 | :---: |
+
 
