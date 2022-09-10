@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from PySide6.QtWidgets import (
-    QWidget, QLabel, QTabWidget, QGroupBox,
+    QWidget, QTabWidget, QGroupBox,
     QPlainTextEdit, QRadioButton, QDateEdit,
     QAbstractSpinBox, QCheckBox, QTextBrowser,
     QApplication
