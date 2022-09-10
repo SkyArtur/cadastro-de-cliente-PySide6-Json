@@ -7,7 +7,7 @@ users = [
     }
 ]
 
-clients = [
+customers = [
     {
         "id": "0",
         "birthday": "default",

@@ -6,11 +6,11 @@ import json
 class Filer:
     file = [
         "./storage/users.json",
-        "./storage/clients.json",
+        "./storage/customers.json",
         "./storage/accounts.json",
         "./storage/statement.json"
     ]
-    model = [users, clients, account, statement]
+    model = [users, customers, account, statement]
 
     def __init__(self):
         self.__setup_files()
@@ -25,7 +25,7 @@ class Filer:
         return
 
     def __select_file(self, target_file: str):
-        mods, index = ['users', 'clients', 'accounts', 'statement'], None
+        mods, index = ['users', 'customers', 'accounts', 'statement'], None
         for i in range(len(mods)):
             if mods[i] == target_file:
                 index = i

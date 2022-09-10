@@ -1,3 +1,3 @@
 from managers.manager_login_new_user import ManagerLogin, ManagerNewUser
 from managers.manager_operations import ManagerOperations
-from managers.manager_new_client import ManagerNewClient
+from managers.manager_new_customer import ManagerNewClient

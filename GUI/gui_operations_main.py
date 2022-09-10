@@ -15,58 +15,58 @@ class GUIOperationsMain(MyWidgetStandard):
         self.setWindowTitle('Sistema de Cadastro de Clientes')
         self.table_main = QTabWidget(self)
         self.table_operations = QWidget(self)
-        self.table_new_customer = QWidget(self)
-        self.groupbox_show_customer_operation = QGroupBox(self.table_operations)
+        self.table_new_client = QWidget(self)
+        self.groupbox_show_customers_operation = QGroupBox(self.table_operations)
         self.groupbox_main_buttons = QGroupBox(self.table_operations)
-        self.groupbox_show_new_customer = QGroupBox(self.table_new_customer)
-        self.show_customer_display = QTextBrowser(self.groupbox_show_customer_operation)
-        self.show_new_customer_display = QTextBrowser(self.groupbox_show_new_customer)
+        self.groupbox_show_new_client = QGroupBox(self.table_new_client)
+        self.show_customers_display = QTextBrowser(self.groupbox_show_customers_operation)
+        self.show_new_client_display = QTextBrowser(self.groupbox_show_new_client)
         self.label_search_client = MyLabelStandard(self.table_operations, "Buscar Cliente")
-        self.label_birthday = MyLabelStandard(self.table_new_customer, "Data de Nascimento")
-        self.label_CPF = MyLabelStandard(self.table_new_customer, "CPF")
-        self.label_phone = MyLabelStandard(self.table_new_customer, "Telefone")
-        self.label_name = MyLabelStandard(self.table_new_customer, "Nome")
-        self.label_email = MyLabelStandard(self.table_new_customer, "Email")
-        self.label_CEP = MyLabelStandard(self.table_new_customer, "CEP")
-        self.label_street = MyLabelStandard(self.table_new_customer, "Logradouro")
-        self.label_number_home = MyLabelStandard(self.table_new_customer, "Nº")
-        self.label_neighborhood = MyLabelStandard(self.table_new_customer, "Bairro")
-        self.label_city = MyLabelStandard(self.table_new_customer, "Cidade")
-        self.label_state = MyLabelStandard(self.table_new_customer, "UF")
-        self.label_balance = MyLabelStandard(self.table_new_customer, "Saldo Inicial")
-        self.label_credits = MyLabelStandard(self.table_new_customer, "Limite Inicial")
+        self.label_birthday = MyLabelStandard(self.table_new_client, "Data de Nascimento")
+        self.label_CPF = MyLabelStandard(self.table_new_client, "CPF")
+        self.label_phone = MyLabelStandard(self.table_new_client, "Telefone")
+        self.label_name = MyLabelStandard(self.table_new_client, "Nome")
+        self.label_email = MyLabelStandard(self.table_new_client, "Email")
+        self.label_CEP = MyLabelStandard(self.table_new_client, "CEP")
+        self.label_street = MyLabelStandard(self.table_new_client, "Logradouro")
+        self.label_number_home = MyLabelStandard(self.table_new_client, "Nº")
+        self.label_neighborhood = MyLabelStandard(self.table_new_client, "Bairro")
+        self.label_city = MyLabelStandard(self.table_new_client, "Cidade")
+        self.label_state = MyLabelStandard(self.table_new_client, "UF")
+        self.label_balance = MyLabelStandard(self.table_new_client, "Saldo Inicial")
+        self.label_credits = MyLabelStandard(self.table_new_client, "Limite Inicial")
         self.label_top = MyLabelTop(self, "Sistema de Gerenciamento de Cliente")
         self.label_bottom = MyLabelBottom(self, "\u00a9SkyArtur - 2022")
         self.__search = MyInputStandard(self.table_operations)
-        self.__birthday = QDateEdit(self.table_new_customer)
-        self.__cpf = MyInputCPF(self.table_new_customer)
-        self.__phone = MyInputPhone(self.table_new_customer)
-        self.__name = MyInputStandard(self.table_new_customer)
-        self.__email = MyInputStandard(self.table_new_customer)
-        self.__cep = MyInputCEP(self.table_new_customer)
-        self.__street = MyInputStandard(self.table_new_customer)
-        self.__neighborhood = MyInputStandard(self.table_new_customer)
-        self.__city = MyInputStandard(self.table_new_customer)
-        self.__state = MyInputStandard(self.table_new_customer)
-        self.__home_number = MyInputStandard(self.table_new_customer)
-        self.__balance = MyInputFloat(self.table_new_customer)
-        self.__credits = MyInputFloat(self.table_new_customer)
+        self.__birthday = QDateEdit(self.table_new_client)
+        self.__cpf = MyInputCPF(self.table_new_client)
+        self.__phone = MyInputPhone(self.table_new_client)
+        self.__name = MyInputStandard(self.table_new_client)
+        self.__email = MyInputStandard(self.table_new_client)
+        self.__cep = MyInputCEP(self.table_new_client)
+        self.__street = MyInputStandard(self.table_new_client)
+        self.__neighborhood = MyInputStandard(self.table_new_client)
+        self.__city = MyInputStandard(self.table_new_client)
+        self.__state = MyInputStandard(self.table_new_client)
+        self.__home_number = MyInputStandard(self.table_new_client)
+        self.__balance = MyInputFloat(self.table_new_client)
+        self.__credits = MyInputFloat(self.table_new_client)
         self.__value_operation = MyInputFloat(self.groupbox_main_buttons)
         self.button_deposit = MyButtonStandard(self.groupbox_main_buttons, "Depósito")
         self.button_withdraw = MyButtonStandard(self.groupbox_main_buttons, "Saque")
         self.button_change_credits = MyButtonStandard(self.groupbox_main_buttons, "Alterar Limite")
         self.button_statement = MyButtonStandard(self.groupbox_main_buttons, "Extrato")
         self.button_search = MyButtonStandard(self.table_operations, "Buscar")
-        self.button_search_CEP = MyButtonSearchCEP(self.table_new_customer, self.__cep, self.__street,
+        self.button_search_CEP = MyButtonSearchCEP(self.table_new_client, self.__cep, self.__street,
                                                    self.__neighborhood, self.__city, self.__state)
-        self.button_save_new_customer = MyButtonStandard(self.table_new_customer, "Salvar Dados")
+        self.button_save_new_client = MyButtonStandard(self.table_new_client, "Salvar Dados")
         self.button_list_customers = MyButtonStandard(self, "Listar Clientes")
         self.button_show_report = MyButtonStandard(self, "Exibir Relatório")
         self.button_exit = MyButtonStandard(self, "Sair")
         self.radio_name = QRadioButton(self.table_operations)
         self.radio_CPF = QRadioButton(self.table_operations)
         self.radio_account = QRadioButton(self.table_operations)
-        self.checkbox_CPF = QCheckBox(self.table_new_customer)
+        self.checkbox_CPF = QCheckBox(self.table_new_client)
         self.setup_tables(), self.setup_boxes(), self.setup_labels()
         self.setup_radio_buttons(), self.setup_inputs(), self.setup_data_show()
         self.setup_checkboxes(), self.setup_buttons()
@@ -108,18 +108,18 @@ class GUIOperationsMain(MyWidgetStandard):
         self.table_operations.setMouseTracking(True)
         self.table_operations.setFocusPolicy(Qt.TabFocus)
         self.table_main.addTab(self.table_operations, "")
-        self.table_main.addTab(self.table_new_customer, "")
+        self.table_main.addTab(self.table_new_client, "")
         self.table_main.setCurrentIndex(0)
         self.table_main.setTabText(self.table_main.indexOf(self.table_operations), "Operações")
-        self.table_main.setTabText(self.table_main.indexOf(self.table_new_customer), "Cadastrar Cliente")
+        self.table_main.setTabText(self.table_main.indexOf(self.table_new_client), "Cadastrar Cliente")
 
     def setup_boxes(self):
-        self.groupbox_show_customer_operation.setGeometry(QRect(270, 60, 401, 291))
-        self.groupbox_show_customer_operation.setTitle("Dados do Cliente")
+        self.groupbox_show_customers_operation.setGeometry(QRect(270, 60, 401, 291))
+        self.groupbox_show_customers_operation.setTitle("Dados do Cliente")
         self.groupbox_main_buttons.setGeometry(QRect(10, 60, 251, 291))
         self.groupbox_main_buttons.setTitle("Operações")
-        self.groupbox_show_new_customer.setGeometry(QRect(20, 180, 385, 161))
-        self.groupbox_show_new_customer.setTitle("")
+        self.groupbox_show_new_client.setGeometry(QRect(20, 180, 385, 161))
+        self.groupbox_show_new_client.setTitle("")
 
     def setup_labels(self):
         self.label_search_client.setGeometry(QRect(10, 20, 81, 31))
@@ -174,12 +174,12 @@ class GUIOperationsMain(MyWidgetStandard):
         self.radio_CPF.setText("CPF")
 
     def setup_data_show(self):
-        self.show_new_customer_display.setGeometry(QRect(10, 10, 375, 141))
-        self.show_new_customer_display.setStyleSheet("border: none; padding: 15px;")
-        self.show_customer_display.setGeometry(QRect(10, 15, 380, 265))
-        self.show_customer_display.setStyleSheet("border: none; padding: 15px;")
-        self.show_customer_display.setFont(self.font1)
-        self.show_customer_display.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.show_new_client_display.setGeometry(QRect(10, 10, 375, 141))
+        self.show_new_client_display.setStyleSheet("border: none; padding: 15px;")
+        self.show_customers_display.setGeometry(QRect(10, 15, 380, 265))
+        self.show_customers_display.setStyleSheet("border: none; padding: 15px;")
+        self.show_customers_display.setFont(self.font1)
+        self.show_customers_display.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
     def setup_checkboxes(self):
         self.checkbox_CPF.setGeometry(QRect(420, 20, 95, 31))
@@ -206,8 +206,8 @@ class GUIOperationsMain(MyWidgetStandard):
         self.button_statement.setGeometry(QRect(20, 240, 211, 41))
         self.button_statement.clicked(self.command_statement)
         # ------------------Button save new client------------------------------
-        self.button_save_new_customer.setGeometry(QRect(440, 290, 201, 51))
-        self.button_save_new_customer.clicked(self.command_save_new_client)
+        self.button_save_new_client.setGeometry(QRect(440, 290, 201, 51))
+        self.button_save_new_client.clicked(self.command_save_new_client)
         # -------------------Button list clients--------------------------------
         self.button_list_customers.setGeometry(QRect(280, 433, 121, 31))
         self.button_list_customers.clicked(self.command_list_clients)
@@ -226,15 +226,15 @@ class GUIOperationsMain(MyWidgetStandard):
             self.__account = None
         if self.radio_name.isChecked():
             manager = ManagerOperations(name=self.__search.text())
-            self.show_customer_display.setText(manager.search_client_by_name())
+            self.show_customers_display.setText(manager.search_client_by_name())
             self.account = manager.data_client
         elif self.radio_account.isChecked():
             manager = ManagerOperations(num_account=self.__search.text())
-            self.show_customer_display.setText(manager.search_client_by_num_account())
+            self.show_customers_display.setText(manager.search_client_by_num_account())
             self.account = manager.data_client
         elif self.radio_CPF.isChecked():
             manager = ManagerOperations(cpf=self.__search.text())
-            self.show_customer_display.setText(manager.search_client_by_cpf())
+            self.show_customers_display.setText(manager.search_client_by_cpf())
             self.account = manager.data_client
         self.__search.clear()
 
@@ -242,13 +242,13 @@ class GUIOperationsMain(MyWidgetStandard):
         try:
             manager = ManagerNewClient(self.return_all_inputs)
             manager.save_new_client()
-            self.show_new_customer_display.clear()
-            self.show_new_customer_display.setText(manager.report())
-            self.show_new_customer_display.setFont(self.font3)
+            self.show_new_client_display.clear()
+            self.show_new_client_display.setText(manager.report())
+            self.show_new_client_display.setFont(self.font3)
         except ValueError:
-            self.show_new_customer_display.setText('DADOS INVÁLIDOS!')
-            self.show_new_customer_display.setAlignment(Qt.AlignCenter)
-            self.show_new_customer_display.setFont(self.font)
+            self.show_new_client_display.setText('DADOS INVÁLIDOS!')
+            self.show_new_client_display.setAlignment(Qt.AlignCenter)
+            self.show_new_client_display.setFont(self.font)
 
     def command_deposit(self):
         try:
@@ -263,7 +263,7 @@ class GUIOperationsMain(MyWidgetStandard):
                 "value": f"{self.value_operation:.2f} +"
             }
             manager.update_account()
-            self.show_customer_display.setText(manager.print_data_client())
+            self.show_customers_display.setText(manager.print_data_client())
             manager.data_client = None
             manager.data_statement = None
         except ValueError:
@@ -290,7 +290,7 @@ class GUIOperationsMain(MyWidgetStandard):
                 "value": f"{self.value_operation:.2f} -"
             }
             manager.update_account()
-            self.show_customer_display.setText(manager.print_data_client())
+            self.show_customers_display.setText(manager.print_data_client())
             manager.data_client = None
             manager.data_statement = None
         except ValueError:
@@ -314,7 +314,7 @@ class GUIOperationsMain(MyWidgetStandard):
                 "value": f"{self.value_operation:.2f}"
             }
             manager.update_account()
-            self.show_customer_display.setText(manager.print_data_client())
+            self.show_customers_display.setText(manager.print_data_client())
             manager.data_client = None
             manager.data_statement = None
         except ValueError:
@@ -329,7 +329,7 @@ class GUIOperationsMain(MyWidgetStandard):
         try:
             manager = ManagerOperations()
             manager.data_client = self.account
-            self.show_customer_display.setText(f"{manager.print_data_client()}<br>{manager.display_statement()}")
+            self.show_customers_display.setText(f"{manager.print_data_client()}<br>{manager.display_statement()}")
             manager.data_client = None
             manager.data_statement = None
         except ValueError:
@@ -341,7 +341,7 @@ class GUIOperationsMain(MyWidgetStandard):
         if self.account is not None:
             self.account = None
         manager = ManagerOperations()
-        self.show_customer_display.setText(
+        self.show_customers_display.setText(
             f"<p><b>Clientes Cadastrados</b></p>"
             f"{manager.print_client_names()}"
         )
@@ -350,7 +350,7 @@ class GUIOperationsMain(MyWidgetStandard):
         if self.account is not None:
             self.account = None
         manager = ManagerOperations()
-        self.show_customer_display.setText(f"<b>Relátorio Geral</b><br>{manager.display_report()}")
+        self.show_customers_display.setText(f"<b>Relátorio Geral</b><br>{manager.print_report()}")
 
     def check_valid_cpf(self):
         if self.checkbox_CPF.isChecked():

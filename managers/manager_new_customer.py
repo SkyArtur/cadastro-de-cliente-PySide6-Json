@@ -12,7 +12,7 @@ class ManagerNewClient(Client, FilerCustomers):
         for cpf in data:
             if cpf == '' or cpf is None:
                 raise ValueError
-        self.id_client = self.define_id_customer()
+        self.id_client = self.define_id_customers()
         self.birthday = data[0]
         self.cpf = data[1]
         self.name = data[2]

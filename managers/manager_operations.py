@@ -39,9 +39,21 @@ class ManagerOperations(Client, FilerCustomers):
 
     def print_client_names(self):
         name = str()
-        for names in self.fetch_all_names():
+        for names in sorted(self.fetch_all_names()):
             name += f"{names.title()}<br>"
         return name
+
+    def print_report(self):
+        report = f"Data: {self.today}<br>"\
+                 f"Número de cliente: <b>{len(self.fetch_all_customers())}</b><br>" \
+                 f"Contas abertas: <b>{self.sum_num_operations('abertura')}</b><br>" \
+                 f"Depósitos realizados: <b>{self.sum_num_operations('deposito')}</b><br>" \
+                 f"Total em depósitos: R$ <b>{self.sum_value_operations('deposito'):.2f}</b><br>" \
+                 f"Saques realizados: <b>{self.sum_num_operations('saque')}</b><br>" \
+                 f"Total em saques: R$ <b>{self.sum_value_operations('saque'):.2f}</b><br><br>" \
+                 f"Total em contas: R$ <b>{sum(i['balance'] for i in self.fetch_all_accounts()):.2f}</b><br>" \
+                 f"Total em créditos: R$ <b>{sum(i['credits'] for i in self.fetch_all_accounts()):.2f}</b><br>"
+        return report
 
     def search_client_by_name(self):
         data = str()
@@ -105,14 +117,4 @@ class ManagerOperations(Client, FilerCustomers):
             if i['op'] == operation and i['date'] == self.today
         )
 
-    def display_report(self):
-        report = f"Data: {self.today}<br>"\
-                 f"Número de cliente: <b>{len(self.fetch_all_customers())}</b><br>" \
-                 f"Contas abertas: <b>{self.sum_num_operations('abertura')}</b><br>" \
-                 f"Depósitos realizados: <b>{self.sum_num_operations('deposito')}</b><br>" \
-                 f"Total em depósitos: R$ <b>{self.sum_value_operations('deposito'):.2f}</b><br>" \
-                 f"Saques realizados: <b>{self.sum_num_operations('saque')}</b><br>" \
-                 f"Total em saques: R$ <b>{self.sum_value_operations('saque'):.2f}</b><br><br>" \
-                 f"Total em contas: R$ <b>{sum(i['balance'] for i in self.fetch_all_accounts()):.2f}</b><br>" \
-                 f"Total em créditos: R$ <b>{sum(i['credits'] for i in self.fetch_all_accounts()):.2f}</b><br>"
-        return report
+

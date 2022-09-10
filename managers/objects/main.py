@@ -37,7 +37,7 @@ class Address:
 
 @dataclass
 class Client(Account, Address):
-    id_customer = None
+    id_client = None
     birthday = None
     cpf = None
     name = None
