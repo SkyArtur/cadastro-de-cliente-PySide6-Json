@@ -10,7 +10,7 @@ class Filer:
         "./storage/accounts.json",
         "./storage/statement.json"
     ]
-    models = [users, clients, account, statement]
+    model = [users, clients, account, statement]
 
     def __init__(self):
         self.__setup_files()
@@ -21,31 +21,30 @@ class Filer:
         for i in range(4):
             if not path.exists(self.file[i]):
                 with open(self.file[i], 'w') as file:
-                    json.dump(self.models[i], file, indent=4, ensure_ascii=False)
+                    json.dump(self.model[i], file, indent=4, ensure_ascii=False)
         return
 
-    def __select_table(self, table: str):
-        tabs = ['users', 'clients', 'accounts', 'statement']
-        index = None
-        for i in range(len(tabs)):
-            if tabs[i] == table:
+    def __select_file(self, target_file: str):
+        mods, index = ['users', 'clients', 'accounts', 'statement'], None
+        for i in range(len(mods)):
+            if mods[i] == target_file:
                 index = i
         return self.file[index]
 
-    def fetch_all(self, table: str):
-        with open(self.__select_table(table)) as file:
-            data = json.load(file)
-        return data
+    def fetch_all(self, target_file: str):
+        with open(self.__select_file(target_file)) as file:
+            data_list = json.load(file)
+        return data_list
 
-    def save(self, table: str, data):
-        with open(self.__select_table(table), 'w') as file:
+    def rewrite(self, target_file: str, data):
+        with open(self.__select_file(target_file), 'w') as file:
             json.dump(data, file, indent=4, ensure_ascii=False)
 
-    def save_in(self, table: str, data: dict):
-        __data = self.fetch_all(table)
-        __data.append(data)
-        with open(self.__select_table(table), 'w') as file:
-            json.dump(__data, file, indent=4, ensure_ascii=False)
+    def save_in(self, target_file: str, data: dict):
+        file_data = self.fetch_all(target_file)
+        file_data.append(data)
+        with open(self.__select_file(target_file), 'w') as file:
+            json.dump(file_data, file, indent=4, ensure_ascii=False)
 
-    def generator_ids(self, table: str):
-        return int(len(self.fetch_all(table)))
+    def generator_ids(self, target_file: str):
+        return len(self.fetch_all(target_file))

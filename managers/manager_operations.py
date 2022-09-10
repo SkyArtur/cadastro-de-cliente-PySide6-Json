@@ -1,12 +1,12 @@
 from managers.objects import Client
 from filer import FilerCustomers
-from time import strftime, localtime
+from time import strftime
 
 
 class ManagerOperations(Client, FilerCustomers):
     def __init__(self, name='default', num_account=None, cpf=None):
         super().__init__()
-        self.__date = strftime("%d/%m/%Y")
+        self.today = strftime("%d/%m/%Y")
         self.name = name
         self.cpf = cpf
         self.num_account = num_account
@@ -38,10 +38,10 @@ class ManagerOperations(Client, FilerCustomers):
         return __data
 
     def print_client_names(self):
-        __name = str()
-        for i in self.fetch_all_names():
-            __name += f"{i.title()}<br>"
-        return __name
+        name = str()
+        for names in self.fetch_all_names():
+            name += f"{names.title()}<br>"
+        return name
 
     def search_client_by_name(self):
         data = str()
@@ -52,9 +52,9 @@ class ManagerOperations(Client, FilerCustomers):
         else:
             for name in self.fetch_all_customers():
                 if name['name'] == self.name:
-                    for account in self.fetch_all_accounts():
-                        if name['id'] == account['id']:
-                            self.data_client = account
+                    for accounts in self.fetch_all_accounts():
+                        if name['id'] == accounts['id']:
+                            self.data_client = accounts
                             data = self.print_data_client()
         return data
 
@@ -82,11 +82,11 @@ class ManagerOperations(Client, FilerCustomers):
 
     def display_statement(self):
         statement = self.fetch_all_statement()
-        report = ""
+        report = str()
         for stm in statement:
             if stm['id'] == self.data_client['id']:
                 report += f"<p>{stm['date']} | {stm['op']} == <b>{stm['value']}</b></p>"
-        report = f"<b>Data</b> ------ <b>Operação</b> ------ <b>Valor</b>" + report
+        report = "<b>Data</b> ------ <b>Operação</b> ------ <b>Valor</b>" + report
         return report
 
     def sum_num_operations(self, operation):
@@ -94,7 +94,7 @@ class ManagerOperations(Client, FilerCustomers):
             [
                 i['op']
                 for i in self.fetch_all_statement()
-                if i['op'] == operation and i["date"] == self.__date
+                if i['op'] == operation and i['date'] == self.today
             ]
         )
 
@@ -102,11 +102,11 @@ class ManagerOperations(Client, FilerCustomers):
         return sum(
             float(i['value'][:-1].strip())
             for i in self.fetch_all_statement()
-            if i['op'] == operation and i['date'] == self.__date
+            if i['op'] == operation and i['date'] == self.today
         )
 
     def display_report(self):
-        report = f"Data: {self.__date}<br>"\
+        report = f"Data: {self.today}<br>"\
                  f"Número de cliente: <b>{len(self.fetch_all_customers())}</b><br>" \
                  f"Contas abertas: <b>{self.sum_num_operations('abertura')}</b><br>" \
                  f"Depósitos realizados: <b>{self.sum_num_operations('deposito')}</b><br>" \

@@ -26,5 +26,5 @@ class FilerAccount(Filer):
                 i['balance'] = data['balance']
                 i['credits'] = data['credits']
                 i['available'] = data['available']
-        self.save("accounts", accounts)
+        self.rewrite("accounts", accounts)
 
