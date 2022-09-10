@@ -329,7 +329,7 @@ class GUIOperationsMain(MyWidgetStandard):
         try:
             manager = ManagerOperations()
             manager.data_client = self.account
-            self.show_customers_display.setText(f"{manager.print_data_client()}<br>{manager.display_statement()}")
+            self.show_customers_display.setText(f"{manager.print_data_client()}<br>{manager.print_statement()}")
             manager.data_client = None
             manager.data_statement = None
         except ValueError:

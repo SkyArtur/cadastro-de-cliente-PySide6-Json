@@ -44,7 +44,7 @@ class ManagerOperations(Client, FilerCustomers):
         return name
 
     def print_report(self):
-        report = f"Data: {self.today}<br>"\
+        report = f"Data: {self.today}<br>" \
                  f"Número de cliente: <b>{len(self.fetch_all_customers())}</b><br>" \
                  f"Contas abertas: <b>{self.sum_num_operations('abertura')}</b><br>" \
                  f"Depósitos realizados: <b>{self.sum_num_operations('deposito')}</b><br>" \
@@ -53,6 +53,15 @@ class ManagerOperations(Client, FilerCustomers):
                  f"Total em saques: R$ <b>{self.sum_value_operations('saque'):.2f}</b><br><br>" \
                  f"Total em contas: R$ <b>{sum(i['balance'] for i in self.fetch_all_accounts()):.2f}</b><br>" \
                  f"Total em créditos: R$ <b>{sum(i['credits'] for i in self.fetch_all_accounts()):.2f}</b><br>"
+        return report
+
+    def print_statement(self):
+        statement = self.fetch_all_statement()
+        report = str()
+        for stm in statement:
+            if stm['id'] == self.data_client['id']:
+                report += f"<p>{stm['date']} | {stm['op']} == <b>{stm['value']}</b></p>"
+        report = "<b>Data</b> ------ <b>Operação</b> ------ <b>Valor</b>" + report
         return report
 
     def search_client_by_name(self):
@@ -92,15 +101,6 @@ class ManagerOperations(Client, FilerCustomers):
         self.save_in_statement(self.data_statement)
         self.save_account_where(self.data_client)
 
-    def display_statement(self):
-        statement = self.fetch_all_statement()
-        report = str()
-        for stm in statement:
-            if stm['id'] == self.data_client['id']:
-                report += f"<p>{stm['date']} | {stm['op']} == <b>{stm['value']}</b></p>"
-        report = "<b>Data</b> ------ <b>Operação</b> ------ <b>Valor</b>" + report
-        return report
-
     def sum_num_operations(self, operation):
         return len(
             [
@@ -116,5 +116,3 @@ class ManagerOperations(Client, FilerCustomers):
             for i in self.fetch_all_statement()
             if i['op'] == operation and i['date'] == self.today
         )
-
-
