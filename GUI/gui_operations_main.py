@@ -208,7 +208,7 @@ class GUIOperationsMain(MyWidgetStandard):
         # ------------------Button save new client------------------------------
         self.button_save_new_client.setGeometry(QRect(440, 290, 201, 51))
         self.button_save_new_client.clicked(self.command_save_new_client)
-        # -------------------Button list clients--------------------------------
+        # -------------------Button list customers--------------------------------
         self.button_list_customers.setGeometry(QRect(280, 433, 121, 31))
         self.button_list_customers.clicked(self.command_list_clients)
         # --------------------Button show report--------------------------------
