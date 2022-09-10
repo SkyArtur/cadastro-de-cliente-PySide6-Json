@@ -39,13 +39,14 @@ class ManagerNewClient(Client, FilerCustomers):
     def save_new_client(self):
         self.save_in_customers(
             Patterns.client(
-                self.id_client, self.birthday, self.cpf, self.name, self.email, self.phone, self.cep,
-                self.street, self.home_number, self.neighborhood, self.city, self.state
+                self.id_client, self.birthday, self.cpf, self.name.lower(),
+                self.email, self.phone, self.cep, self.street.lower(), self.home_number,
+                self.neighborhood.lower(), self.city.lower(), self.state
             )
         )
         self.save_in_account(
             Patterns.account(
-                self.id_client, self.num_account, self.opening, self.holder,
+                self.id_client, self.num_account, self.opening, self.holder.lower(),
                 self.balance, self.credits, self.available
             )
         )

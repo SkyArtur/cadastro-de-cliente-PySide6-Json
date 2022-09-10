@@ -1,3 +1,5 @@
+import re
+
 from managers.objects import Client
 from filer import FilerCustomers
 from time import strftime
@@ -90,7 +92,7 @@ class ManagerOperations(Client, FilerCustomers):
     def search_client_by_cpf(self):
         data = str()
         for cpfs in self.fetch_all_customers():
-            if cpfs['cpf'] == self.cpf:
+            if cpfs['cpf'].replace('.', '').replace('-', '') == self.cpf:
                 for accounts in self.fetch_all_accounts():
                     if cpfs['id'] == accounts['id']:
                         self.data_client = accounts

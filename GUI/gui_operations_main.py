@@ -82,7 +82,7 @@ class GUIOperationsMain(MyWidgetStandard):
             if inputs.text() is None or inputs.text() == '':
                 raise ValueError
             else:
-                data.append(inputs.text())
+                data.append(inputs.text().strip())
                 inputs.clear()
         return tuple(data)
 
