@@ -67,9 +67,9 @@ class GUIOperationsMain(MyWidgetStandard):
         self.radio_CPF = QRadioButton(self.table_operations)
         self.radio_account = QRadioButton(self.table_operations)
         self.checkbox_CPF = QCheckBox(self.table_new_client)
-        self.setup_tables(), self.setup_boxes(), self.setup_labels()
-        self.setup_radio_buttons(), self.setup_inputs(), self.setup_data_show()
-        self.setup_checkboxes(), self.setup_buttons()
+        self.__setup_tables(), self.__setup_boxes(), self.__setup_labels()
+        self.__setup_radio_buttons(), self.__setup_inputs(), self.__setup_data_show()
+        self.__setup_checkboxes(), self.__setup_buttons()
 
     @property
     def return_all_inputs(self):
@@ -98,7 +98,7 @@ class GUIOperationsMain(MyWidgetStandard):
     def account(self, value):
         self.__account = value
 
-    def setup_tables(self):
+    def __setup_tables(self):
         self.table_main.setGeometry(QRect(10, 60, 711, 361))
         self.table_main.setFont(self.font3)
         self.table_main.setFocusPolicy(Qt.TabFocus)
@@ -113,7 +113,7 @@ class GUIOperationsMain(MyWidgetStandard):
         self.table_main.setTabText(self.table_main.indexOf(self.table_operations), "Operações")
         self.table_main.setTabText(self.table_main.indexOf(self.table_new_client), "Cadastrar Cliente")
 
-    def setup_boxes(self):
+    def __setup_boxes(self):
         self.groupbox_show_customers_operation.setGeometry(QRect(270, 60, 401, 291))
         self.groupbox_show_customers_operation.setTitle("Dados do Cliente")
         self.groupbox_main_buttons.setGeometry(QRect(10, 60, 251, 291))
@@ -121,7 +121,7 @@ class GUIOperationsMain(MyWidgetStandard):
         self.groupbox_show_new_client.setGeometry(QRect(20, 180, 385, 161))
         self.groupbox_show_new_client.setTitle("")
 
-    def setup_labels(self):
+    def __setup_labels(self):
         self.label_search_client.setGeometry(QRect(10, 20, 81, 31))
         self.label_birthday.setGeometry(QRect(20, 20, 111, 31))
         self.label_CPF.setGeometry(QRect(270, 20, 31, 31))
@@ -139,7 +139,7 @@ class GUIOperationsMain(MyWidgetStandard):
         self.label_top.setGeometry(QRect(10, 9, 711, 41))
         self.label_bottom.setGeometry(QRect(8, 470, 721, 20))
 
-    def setup_inputs(self):
+    def __setup_inputs(self):
         self.__search.setGeometry(QRect(90, 20, 240, 31))
         self.__birthday.setGeometry(QRect(140, 20, 101, 31))
         self.__birthday.setFont(self.font2)
@@ -164,7 +164,7 @@ class GUIOperationsMain(MyWidgetStandard):
         self.__value_operation.setGeometry(QRect(20, 40, 211, 41))
         self.__value_operation.setPlaceholderText('Digite o Valor da Operação')
 
-    def setup_radio_buttons(self):
+    def __setup_radio_buttons(self):
         self.radio_account.setGeometry(QRect(350, 20, 71, 31))
         self.radio_account.setText("Nº Conta")
         self.radio_account.setChecked(True)
@@ -173,7 +173,7 @@ class GUIOperationsMain(MyWidgetStandard):
         self.radio_CPF.setGeometry(QRect(500, 20, 41, 31))
         self.radio_CPF.setText("CPF")
 
-    def setup_data_show(self):
+    def __setup_data_show(self):
         self.show_new_client_display.setGeometry(QRect(10, 10, 375, 141))
         self.show_new_client_display.setStyleSheet("border: none; padding: 15px;")
         self.show_customers_display.setGeometry(QRect(10, 15, 380, 265))
@@ -181,12 +181,12 @@ class GUIOperationsMain(MyWidgetStandard):
         self.show_customers_display.setFont(self.font1)
         self.show_customers_display.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-    def setup_checkboxes(self):
+    def __setup_checkboxes(self):
         self.checkbox_CPF.setGeometry(QRect(420, 20, 95, 31))
         self.checkbox_CPF.setText("Validar?")
         self.checkbox_CPF.clicked.connect(self.check_valid_cpf)
 
-    def setup_buttons(self):
+    def __setup_buttons(self):
         # ----------------------Button search-----------------------------------
         self.button_search.setGeometry(QRect(560, 20, 111, 31))
         self.button_search.clicked(self.command_search_client)
