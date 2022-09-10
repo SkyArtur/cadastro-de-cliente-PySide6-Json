@@ -53,7 +53,7 @@ class MyButtonSearchCEP(QPushButton):
             border-color: rgb(220, 220, 220);
         }""")
         icon_lupa = QIcon()
-        icon_lupa.addFile("./GUI/icon/lupa.ico", QSize(), QIcon.Normal, QIcon.Off)
+        icon_lupa.addFile("lupa.ico", QSize(), QIcon.Normal, QIcon.Off)
         self.setIcon(icon_lupa)
         self.cep = inputs[0]
         self.street = inputs[1]

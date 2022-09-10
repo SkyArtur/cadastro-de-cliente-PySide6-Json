@@ -11,7 +11,7 @@ class MyWidgetStandard(QWidget):
     def __init__(self):
         QWidget.__init__(self)
         icon = QIcon()
-        icon.addFile('./GUI/icon/py.ico', QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile('py.ico', QSize(), QIcon.Normal, QIcon.Off)
         self.setWindowIcon(icon)
         self.font = QFont()
         self.font.setPointSize(14)
