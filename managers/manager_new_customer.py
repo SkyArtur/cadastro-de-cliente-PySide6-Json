@@ -74,15 +74,25 @@ class ManagerNewClient(Client, FilerCustomers):
         )
 
     def report(self):
-        text = f"""<p><b>Novo Cliente Cadastrado com Sucesso</b></p>
-        <p><b>Data de Nascimento:</b> {self.birthday}</p>
-        <p><b>Nome:</b> {self.name.title()} <b>CPF:</b> {self.cpf}</p>
-        <p><b>Telefone:</b> {self.phone} <b>Email:</b> {self.email}</p>
-        <p><b>Logradouro:</b> {self.street.title()} <b>Nº</b> {self.home_number}</p>      
-        <p><b>CEP:</b> {self.cep}</p>
-        <p><b>Bairro:</b> {self.neighborhood.title()} <b>Cidade:</b> {self.city.title()} <b>UF:</b> {self.state}</p>
-        <p><b>Limite Inicial:</b> R${self.credits:.2f} <b>Saldo Inicial:</b> R${self.balance:.2f}</p>
-        <p><b>Disponível:</b> R${self.available:.2f}</p>"""
+        text = f"""
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+        </head>
+        <body>
+            <h3 style="text-align: center;"><b>Novo Cliente Cadastrado com Sucesso</b></h3>
+            <p><b>Data de Nascimento:</b> <i>{self.birthday}</i></p>
+            <p><b>Nome:</b> <i>{self.name.title()}</i>  <b>CPF:</b> <i>{self.cpf}</i></p>
+            <p><b>Telefone:</b> <i>{self.phone}</i>  <b>Email:</b> <i>{self.email}</i></p>
+            <p><b>Logradouro:</b> <i>{self.street.title()}</i>  <b>Nº</b> <i>{self.home_number}</i></p>      
+            <p><b>CEP:</b> <i><i></i></i></p>
+            <p><b>Bairro:</b> <i>{self.neighborhood.title()}</i> <b>Cidade:</b> <i>{self.city.title()}</i> <b>UF:</b> <i>{self.state}</i></p>
+            <p><b>Limite Inicial:</b> R$<i>{self.credits:.2f}</i> <b>Saldo Inicial:</b> R$<i>{self.balance:.2f}</i></p>
+            <p><b>Disponível:</b> R$<i>{self.available:.2f}<</i>/p>
+        </body>
+        </html>
+        """
         return text
 
     @staticmethod

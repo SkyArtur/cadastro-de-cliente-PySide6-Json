@@ -350,7 +350,7 @@ class GUIOperationsMain(MyWidgetStandard):
         if self.account is not None:
             self.account = None
         manager = ManagerOperations()
-        self.show_customers_display.setText(f"<b>Relátorio Geral</b><br>{manager.print_report()}")
+        self.show_customers_display.setText(manager.print_report())
 
     def check_valid_cpf(self):
         if self.checkbox_CPF.isChecked():
