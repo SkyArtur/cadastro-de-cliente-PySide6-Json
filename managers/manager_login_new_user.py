@@ -18,7 +18,6 @@ class ManagerLogin(User, FilerUser):
 class ManagerNewUser(User, FilerUser):
     def __init__(self, name, username, password, confirm):
         super().__init__()
-        self.id_user = self.generator_id_users()
         self.name = name
         self.username = username
         self.password = password
@@ -40,9 +39,9 @@ class ManagerNewUser(User, FilerUser):
     def save_new_user(self):
         self.save_in_users(
             Patterns.user(
-                self.id_user,
-                self.name,
-                self.username,
-                self.password
+                id=self.generator_id_users(),
+                name=self.name,
+                username=self.username,
+                password=self.password
             )
         )
