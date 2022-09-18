@@ -1,5 +1,4 @@
 import re
-
 from managers.objects import Client
 from filer import FilerCustomers
 from time import strftime
@@ -32,11 +31,24 @@ class ManagerOperations(Client, FilerCustomers):
         self.__data_statement = value
 
     def print_data_client(self):
-        __data = f"<b>Conta Nº:</b> {self.data_client['num']}<br>" \
-                 f"<b>Titular:</b> {self.data_client['holder'].title()}<br>" \
-                 f"<b>Saldo:</b> R${self.data_client['balance']:.2f}<br>" \
-                 f"<b>Limite:</b> R${self.data_client['credits']:.2f}<br>" \
-                 f"<b>Total Disponível:</b> R${self.data_client['available']:.2f}"
+        __data = f"""
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+        </head>
+        <body>
+            <div style:"font-family: Arial, Helvetica, sans-serif;">
+                <h3 style="text-align: center; background-color: rgb(235, 235, 235);">Dados do Cliente</h3>
+                <p><label><b><i>Conta Nº: </i></b><span>{self.data_client['num']}</span></label></p>
+                <p><label><b><i>Titular: </i></b><span">{self.data_client['holder'].title()}</span></label></p>
+                <p><label><b><i>Saldo: </i></b><span">{self.data_client['balance']:.2f}</span></label></p>
+                <p><label><b><i>Limite: </i></b><span">{self.data_client['credits']:.2f}</span></label></p>
+                <p><label><b><i>Disponível: </i></b><span>R${self.data_client['available']:.2f}</span></label></p>
+            </div>
+        </body>
+        </html>
+        """
         return __data
 
     def print_client_names(self):
@@ -62,8 +74,33 @@ class ManagerOperations(Client, FilerCustomers):
         report = str()
         for stm in statement:
             if stm['id'] == self.data_client['id']:
-                report += f"<p>{stm['date']} | {stm['op']} == <b>{stm['value']}</b></p>"
-        report = "<b>Data</b> ------ <b>Operação</b> ------ <b>Valor</b>" + report
+                report += f"""
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                </head>
+                <body>
+                    <p style='color: rgb(116, 116, 116); display: flex; justify-content: space-between;'>
+                        <span>{stm['date']}</span>
+                        <span>{stm['op']}</span>
+                        <span style='color: #000;'>R$<i>{stm['value']}</i></span></p>
+                </body>
+                </html>
+                """
+        report = f"""
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+        </head>
+        <body>
+            <div style="font-family: Arial, Helvetica, sans-serif;">
+                <h3 style="background-color: rgb(235, 235, 235); text-align: center;">Extrato</h3>
+            </div>
+        </body>
+        </html>
+        """ + report
         return report
 
     def search_client_by_name(self):
